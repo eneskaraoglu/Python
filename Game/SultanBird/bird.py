@@ -18,6 +18,12 @@ bird_image = pygame.transform.scale(bird_image, (50, 50))  # Görseli boyutland�
 bird_image2 = pygame.image.load("assets/sultan_papagani2.png")
 bird_image2 = pygame.transform.scale(bird_image2, (50, 50))  # İkinci görseli boyutlandır
 
+mountain_image = pygame.image.load("assets/mountain.png")
+cloud_image = pygame.image.load("assets/cloud.png")
+# Görselleri boyutlandır (istenen boyutlara göre ayarlayın)
+mountain_image = pygame.transform.scale(mountain_image, (100, 400))  # Örnek boyut
+cloud_image = pygame.transform.scale(cloud_image, (200, 200))  # Örnek boyut
+
 # Renkler
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
@@ -82,15 +88,22 @@ def create_pipe():
     top_pipe = pygame.Rect(WIDTH, 0, pipe_width, height - gap)
     return [bottom_pipe, top_pipe]
 
+
 def move_pipes(pipes):
     for pipe in pipes:
         pipe.x -= 3
     return [pipe for pipe in pipes if pipe.x > -pipe_width]
 
 def draw_pipes(pipes):
-    current_color = PIPE_COLORS[level]  # Mevcut seviyeye göre renk seç
     for pipe in pipes:
-        pygame.draw.rect(screen, current_color, pipe)
+        if pipe.y == 0:  # Üst boru (bulut)
+            # Bulutun alt kısmı borunun yüksekliğine göre ayarlanıyor
+            cloud_y = pipe.height - cloud_image.get_height()
+            screen.blit(cloud_image, (pipe.x, cloud_y))
+        else:  # Alt boru (dağ)
+            # Dağ görselini borunun genişliğine göre ortalama
+            mountain_x = pipe.x - (mountain_image.get_width() - pipe_width) // 2
+            screen.blit(mountain_image, (mountain_x, pipe.y))
 
 def check_collision(pipes, bird_rect):
     for pipe in pipes:

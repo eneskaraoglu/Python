@@ -9,7 +9,7 @@ pygame.init()
 WIDTH, HEIGHT = 400, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
-pygame.display.set_caption("Flappy Bird")
+pygame.display.set_caption("Sultan Bird")
 
 # Görselleri yükle
 bird_image = pygame.image.load("Game/SultanBird/assets/sultan_papagani.png")
@@ -57,8 +57,8 @@ total_pipes_spawned = 0  # Toplam oluşturulan boru sayısı
 pipe_width = 50
 pipe_gaps = {
     1: 400,  # En kolay seviye
-    2: 300,  # Biraz daha zor
-    3: 200,  # Orta zorluk
+    2: 325,  # Biraz daha zor
+    3: 225,  # Orta zorluk
     4: 150,  # Zor
     5: 100   # En zor seviye
 }  # Her seviye için farklı boşluk mesafeleri
@@ -83,8 +83,8 @@ def create_pipe():
     bottom_pipe = pygame.Rect(WIDTH, height, pipe_width, HEIGHT - height)
     
     # Seviye 1'de sadece alt borular
-    if level == 1:
-        return [bottom_pipe]
+    #if level == 1:
+    #    return [bottom_pipe]
     
     # Diğer seviyelerde üst ve alt borular
     gap = pipe_gaps[level]
@@ -101,12 +101,13 @@ def draw_pipes(pipes):
     for pipe in pipes:
         if pipe.y == 0:  # Üst boru (bulut)
             # Bulutun alt kısmı borunun yüksekliğine göre ayarlanıyor
-            cloud_y = pipe.height - cloud_image.get_height()
-            screen.blit(cloud_image, (pipe.x, cloud_y))
+            #pygame.draw.rect(screen, PIPE_COLORS[1], pipe)
+            screen.blit(cloud_image, (pipe.x-75, pipe.height-140))  # Bulutun x pozisyonunu ayarladım
+            
         else:  # Alt boru (dağ)
-            # Dağ görselini borunun genişliğine göre ortalama
-            #ountain_x = pipe.x - (mountain_image.get_width() - pipe_width) // 2
+            #pygame.draw.rect(screen, PIPE_COLORS[1], pipe)
             screen.blit(mountain_image, (pipe.x, pipe.y))
+            
 
 def check_collision(pipes, bird_rect):
     for pipe in pipes:

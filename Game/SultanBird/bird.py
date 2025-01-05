@@ -49,7 +49,7 @@ jump = -10
 
 # Oyun seviyesi ve zorluk
 level = 1
-pipes_passed = 0
+pipes_passed = 0  # Geçilen boruları saymak için değişken ekledim
 PIPES_PER_LEVEL = 3  # Her seviye için 3 çubuk
 total_pipes_spawned = 0  # Toplam oluşturulan boru sayısı
 
@@ -57,10 +57,10 @@ total_pipes_spawned = 0  # Toplam oluşturulan boru sayısı
 pipe_width = 50
 pipe_gaps = {
     1: 400,  # En kolay seviye
-    2: 350,  # Biraz daha zor
-    3: 300,  # Orta zorluk
-    4: 250,  # Zor
-    5: 200   # En zor seviye
+    2: 300,  # Biraz daha zor
+    3: 200,  # Orta zorluk
+    4: 150,  # Zor
+    5: 100   # En zor seviye
 }  # Her seviye için farklı boşluk mesafeleri
 pipe_x = WIDTH
 pipe_height = random.randint(150, 400)
@@ -165,7 +165,7 @@ while running:
             score += 1
             
             # Seviye kontrolü
-            if pipes_passed >= PIPES_PER_LEVEL and level < 5:  # 5 seviyeye kadar çıkabilir
+            if pipes_passed >= PIPES_PER_LEVEL and level < 5:
                 level += 1
                 pipes_passed = 0
                 total_pipes_spawned = 0
@@ -196,10 +196,8 @@ while running:
         # Skor ve Seviye
         score_text = font.render(f'Skor: {score}', True, WHITE)
         level_text = font.render(f'Seviye: {level}', True, WHITE)
-        pipes_text = font.render(f'Borular: {pipes_passed}/{PIPES_PER_LEVEL}', True, WHITE)
         screen.blit(score_text, (10, 10))
         screen.blit(level_text, (10, 50))
-        screen.blit(pipes_text, (10, 90))
     else:
         # Oyun bitiş ekranı
         game_over_text = font.render('OYUN BİTTİ - TEKRAR BAŞLAMAK İÇİN BOŞLUK', True, WHITE)

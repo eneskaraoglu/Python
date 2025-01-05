@@ -11,18 +11,21 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 pygame.display.set_caption("Flappy Bird")
 
-# Kuş görsellerini yükle
-bird_image = pygame.image.load("assets/sultan_papagani.png")
-bird_image = pygame.transform.scale(bird_image, (50, 50))  # Görseli boyutlandır
+# Görselleri yükle
+bird_image = pygame.image.load("Game/SultanBird/assets/sultan_papagani.png")
+bird_image = pygame.transform.scale(bird_image, (50, 50))
 
-bird_image2 = pygame.image.load("assets/sultan_papagani2.png")
-bird_image2 = pygame.transform.scale(bird_image2, (50, 50))  # İkinci görseli boyutlandır
+bird_image2 = pygame.image.load("Game/SultanBird/assets/sultan_papagani2.png")
+bird_image2 = pygame.transform.scale(bird_image2, (50, 50))
 
-mountain_image = pygame.image.load("assets/mountain.png")
-cloud_image = pygame.image.load("assets/cloud.png")
-# Görselleri boyutlandır (istenen boyutlara göre ayarlayın)
-mountain_image = pygame.transform.scale(mountain_image, (100, 400))  # Örnek boyut
-cloud_image = pygame.transform.scale(cloud_image, (200, 200))  # Örnek boyut
+mountain_image = pygame.image.load("Game/SultanBird/assets/mountain.png")
+cloud_image = pygame.image.load("Game/SultanBird/assets/cloud.png")
+# Görselleri boyutlandır
+mountain_image = pygame.transform.scale(mountain_image, (50, 400))  # Dağ boyutu
+cloud_image = pygame.transform.scale(cloud_image, (200, 200))  # Bulut boyutu
+# Arka plan görselini yükle
+background_image = pygame.image.load("Game/SultanBird/assets/background.png")
+background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 
 # Renkler
 WHITE = (255, 255, 255)
@@ -102,8 +105,8 @@ def draw_pipes(pipes):
             screen.blit(cloud_image, (pipe.x, cloud_y))
         else:  # Alt boru (dağ)
             # Dağ görselini borunun genişliğine göre ortalama
-            mountain_x = pipe.x - (mountain_image.get_width() - pipe_width) // 2
-            screen.blit(mountain_image, (mountain_x, pipe.y))
+            #ountain_x = pipe.x - (mountain_image.get_width() - pipe_width) // 2
+            screen.blit(mountain_image, (pipe.x, pipe.y))
 
 def check_collision(pipes, bird_rect):
     for pipe in pipes:
@@ -177,6 +180,9 @@ while running:
 
     # Ekranı temizle ve çizim yap
     screen.fill(SKY_BLUE)
+    
+    # Arka planı çiz
+    screen.blit(background_image, (0, 0))
     
     if game_active:
         # Kuş - Zıplama durumuna göre farklı görsel kullan

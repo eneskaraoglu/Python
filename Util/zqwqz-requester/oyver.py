@@ -19,8 +19,8 @@ headers_template = {
 }
 
 # Döngü için başlangıç ve bitiş ID'si
-start_id = 230  # Başlangıç ID
-end_id = 350    # Bitiş ID
+start_id = 280  # Başlangıç ID
+end_id = 1350    # Bitiş ID
 
 # Döngü - Belirtilen aralıkta ardışık istekler gönderilir
 for pid in range(start_id, end_id + 1):

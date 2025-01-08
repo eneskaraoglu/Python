@@ -9,7 +9,9 @@ headers_template = {
     "accept": "*/*",  # Sunucudan herhangi bir içerik türünü kabul ettiğimizi belirtir
     "accept-language": "tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7",  # Tercih edilen diller
     "content-type": "application/x-www-form-urlencoded; charset=UTF-8",  # Gönderilen verinin formatı
-    "cookie": "PHPSESSID=3fe8e1bnqkbc0oscddek5dq0io; SL_G_WPT_TO=tr; SL_GWPT_Show_Hide_tmp=1; browserHash=5e0df38b78670a8159a8486f1675e828; SL_wptGlobTipTmp=1; guser=4b45b2b22d86b3381d3d67d0b732952c; newsChecked=false",  # Oturum bilgileri
+    # Oturum bilgileri
+    "cookie": "",  # Oturum bilgileri burayı dolduracağız
+    # Oturum bilgileri
     "origin": "https://zqwqz.org",  # İstek kaynağını belirtir (CORS için)
     "sec-ch-ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',  # Tarayıcı bilgisi
     "sec-ch-ua-mobile": "?0",  # Mobil cihaz kullanılmadığını belirtir
@@ -19,8 +21,8 @@ headers_template = {
 }
 
 # Döngü için başlangıç ve bitiş ID'si
-start_id = 280  # Başlangıç ID
-end_id = 1350    # Bitiş ID
+start_id = 1051  # Başlangıç ID
+end_id = 2350    # Bitiş ID
 
 # Döngü - Belirtilen aralıkta ardışık istekler gönderilir
 for pid in range(start_id, end_id + 1):

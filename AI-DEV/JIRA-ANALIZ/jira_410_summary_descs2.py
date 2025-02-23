@@ -8,7 +8,7 @@ if __name__ == "__main__":
     custom_words = {'müşteri', 'gamze','çalışmalar'}
 
     # Sınıfı başlatın; CSV dosya yolunuzu girin
-    analysis = TextAnalysis(csv_path=r'C:\Users\enesk\Downloads\jira.csv', custom_stopwords=custom_words)
+    analysis = TextAnalysis(csv_path=r'C:\ANALIZ_DATA\jira.csv', custom_stopwords=custom_words)
 
     # Veriyi yükleyin ve ön işlemleri gerçekleştirin
     analysis.load_data()

@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Veriyi yükleyelim
-df = pd.read_csv(r'C:\Users\enesk\Downloads\jira.csv', sep=",", encoding="utf-8")
+df = pd.read_csv(r'C:\ANALIZ_DATA\jira.csv', sep=",", encoding="utf-8")
 
 # Project ve Creator için frekans tablosu (crosstab) oluşturma
 project_creator = pd.crosstab(df['Project'], df['Creator'])

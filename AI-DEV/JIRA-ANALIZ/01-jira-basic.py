@@ -1,7 +1,7 @@
 import pandas as pd
 
 # CSV dosyanızı okuyun. Eğer dosyanız farklı bir ayırıcı kullanıyorsa sep parametresini güncelleyin.
-df = pd.read_csv(r'C:\Users\enesk\Downloads\jira.csv', sep=",", encoding="utf-8")
+df = pd.read_csv(r'C:\ANALIZ_DATA\jira.csv', sep=",", encoding="utf-8")
 print(df.head())
 
 

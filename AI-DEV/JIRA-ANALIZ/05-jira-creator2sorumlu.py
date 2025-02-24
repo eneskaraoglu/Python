@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Veriyi yükleyelim
-df = pd.read_csv(r'C:\Users\enesk\Downloads\jira.csv', sep=",", encoding="utf-8")
+df = pd.read_csv(r'C:\ANALIZ_DATA\jira.csv', sep=",", encoding="utf-8")
 
 # Eğer "Sorumlu Geliştirici" sütununda eksik (NaN) veri varsa, ilgili satır için "Creator" değerini kullanalım.
 df['Effective Developer'] = df['Sorumlu Geliştirici'].fillna(df['Creator'])

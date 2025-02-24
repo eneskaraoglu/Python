@@ -1,8 +1,8 @@
 import pandas as pd
 
 # HTML dosyasını oku
-input_file = r'C:\Users\enesk\Downloads\jira.xls'  # Dosya aslında HTML
-output_file = r'C:\Users\enesk\Downloads\jira.csv'
+input_file = r'C:\ANALIZ_DATA_MANUPLE\jira_.xls'  # Dosya aslında HTML
+output_file = r'C:\ANALIZ_DATA_MANUPLE\jira_jira.csv'
 
 # HTML dosyasındaki tabloları oku
 try:

@@ -19,6 +19,6 @@ def clean_description(text):
     text = text.lower()
     return text
 
-df['cleaned_Description'] = df['DESCRIPTION'].apply(clean_description)
+df['cleaned_worklogbody'] = df['worklogbody'].apply(clean_description)
 
-print(df[['DESCRIPTION', 'cleaned_Description']].head())
+print(df[['worklogbody', 'cleaned_worklogbody']].head())

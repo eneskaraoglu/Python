@@ -54,11 +54,11 @@ def extract_features(text):
     #has_code_blocks = '```' in text
     has_steps = bool(re.search(r'(\d+\.|adım|step)', text.lower()))
     has_screenshots = bool(re.search(r'(\[image\]|\.png|\.jpg|\.jpeg|\.gif)', text.lower()))
-    url_count = len(re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', text))
+    url_count = bool(re.search(r'(\d+\.|http|www)', text.lower())) 
     bullet_points = text.count('•') + text.count('- ') + text.count('* ')
-    has_acceptance_criteria = 'kabul kriterleri' in text.lower() or 'örnek' in text.lower() or 'örneğin' in text.lower()
-    has_expected_result = 'olmalı' in text.lower() or 'istenen' in text.lower() or 'isteniyor' in text.lower()
-    has_altsistem = 'stok' in text.lower() or 'kalite' in text.lower() or 'finans' in text.lower() or 'üretim' in text.lower() or 'satış' in text.lower() or 'satınalma' in text.lower()
+    has_acceptance_criteria = 'kabul kriterleri' in text.lower() or 'örnek' in text.lower() or 'örneğin' in text.lower() or 'isten' in text.lower() 
+    has_expected_result = 'olmalı' in text.lower() or 'yapılmalı' in text.lower() or 'yapılması' in text.lower() or 'yapabilir' in text.lower()  or 'yardım' in text.lower() or 'çözüm' in text.lower()  or 'öneri' in text.lower() or 'bug' in text.lower()
+    has_altsistem = 'stok' in text.lower() or 'kalite' in text.lower() or 'finans' in text.lower() or 'üretim' in text.lower() or 'satış' in text.lower() or 'satınalma' in text.lower()  or 'kalite' in text.lower() or 'bakım' in text.lower()
     
     return pd.Series({
         'char_count': char_count,
@@ -85,12 +85,12 @@ df['final_responsible'] = df['Sorumlu Geliştirici'].fillna('')
 df.loc[df['final_responsible'] == '', 'final_responsible'] = df['Creator']
 
 def quality_score(row):
-    # Eğer final_responsible, Creator ile aynı ise Undefined olarak işaretle
-    if row['final_responsible'] == row['Creator']:
-        return 'Undefined'
+    
     
     score = 0
     # Temel kriterler
+
+       
     if row['word_count'] >= 30: score += 1
     if row['sentence_count'] >= 3: score += 1
     if row['avg_word_length'] >= 4: score += 1
@@ -104,16 +104,19 @@ def quality_score(row):
     if row['has_acceptance_criteria']: score += 1
     if row['has_expected_result']: score += 1
     if row['has_altsistem']: score += 1
+    if row['url_count']: score += 1
+    if row['final_responsible'] == row['Creator']: score -= 1 
     
     # Toplam puana göre kalite değerlendirmesi
     if score >= 7:
-        return 'High'
+        quality = 'High'
     elif score >= 4:
-        return 'Medium'
+        quality = 'Medium'
     else:
-        return 'Low'
+        quality = 'Low'
+    return pd.Series({'quality': quality, 'score': score})
 
-df['quality'] = df.apply(quality_score, axis=1)
+df[['quality', 'score']] = df.apply(quality_score, axis=1)
 
 # Görselleştirmeler
 # 1. Kalite Dağılımı
@@ -262,3 +265,26 @@ plt.xticks(indices, creators, rotation=45, ha='right')
 plt.legend()
 plt.tight_layout()
 plt.show()
+
+
+# CSV olarak dışa aktarma
+output_columns = [
+    'Creator', 'Jira', 'Description', 'quality', 'score', 'Sorumlu Geliştirici', 
+    'quality_score', 'has_altsistem', 'has_steps', 'has_screenshots', 
+    'has_acceptance_criteria', 'has_expected_result', 'word_count', 
+    'sentence_count', 'avg_word_length', 'technical_terms', 'has_code_blocks', 'url_count'
+]
+
+# Eğer 'Jira' sütunu yoksa, hata almamak için sütun listesinden çıkarın
+output_columns = [col for col in output_columns if col in df.columns]
+
+# CSV dosyasına kaydet
+output_file = r'C:\ANALIZ_DATA\jira_analysis_results.csv'
+df[output_columns].to_csv(output_file, index=False, encoding='utf-8-sig')
+
+print(f"Dosya başarıyla oluşturuldu: {output_file}")
+
+# Excel dosyası olarak kaydet
+df[output_columns].to_excel(r'C:\ANALIZ_DATA\jira_analysis_results.xlsx', index=False, engine='openpyxl')
+
+print("Excel dosyası başarıyla kaydedildi.")

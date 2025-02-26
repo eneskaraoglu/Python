@@ -37,7 +37,8 @@ def extract_features(text):
             #'bullet_points': 0,
             'has_acceptance_criteria': False,
             'has_expected_result': False,
-            'has_altsistem': False
+            'has_altsistem': False,
+            'ekran_kodu' :False
         })
 
     # Temel metrikler
@@ -56,8 +57,8 @@ def extract_features(text):
     has_screenshots = bool(re.search(r'(\[image\]|\.png|\.jpg|\.jpeg|\.gif)', text.lower()))
     url_count = bool(re.search(r'(\d+\.|http|www)', text.lower())) 
     #bullet_points = text.count('•') + text.count('- ') + text.count('* ')
-    has_acceptance_criteria = 'kabul kriterleri' in text.lower() or 'örne' in text.lower()
-    has_expected_result = 'olmalı' in text.lower() or 'yapılma' in text.lower() or 'yapabilir' in text.lower()  or 'yardım' in text.lower() or 'çözüm' in text.lower()  or 'öneri' in text.lower() or 'bug' in text.lower()  or 'isten' in text.lower() 
+    has_acceptance_criteria = 'kabul kriterleri' in text.lower() or 'örne' in text.lower() or 'meli' in text.lower() or 'malı' in text.lower()
+    has_expected_result = 'olmalı' in text.lower() or 'yapılma' in text.lower() or 'yapabilir' in text.lower()  or 'yardım' in text.lower() or 'çözüm' in text.lower()  or 'öneri' in text.lower() or 'bug' in text.lower()  or 'isten' in text.lower() or 'edil' in text.lower() 
     has_altsistem = 'stok' in text.lower() or 'kalite' in text.lower() or 'finans' in text.lower() or 'üretim' in text.lower() or 'satış' in text.lower() or 'satınalma' in text.lower()  or 'kalite' in text.lower() or 'bakım' in text.lower()
     
     return pd.Series({
@@ -100,8 +101,8 @@ def quality_score(row):
     if row['has_expected_result']: score += 3
     if row['has_altsistem']: score += 1
     if row['url_count']: score += 1
-    if row['Creator'] == row['final_responsible']:
-        score -= 1
+    if row['Creator'] == row['final_responsible']: score -= 1
+    if row['Ekran Kodu'] != "":  score += 1
 
 
     # Toplam puana göre kalite değerlendirmesi
@@ -280,9 +281,9 @@ plt.show()
 
 # CSV olarak dışa aktarma
 output_columns = [
-    'Creator', 'Jira', 'Description', 'quality', 'score', 'Sorumlu Geliştirici', 
+    'Key','Creator', 'Jira', 'Description', 'quality', 'score', 'Sorumlu Geliştirici', 
     'quality_score', 'has_acceptance_criteria', 'has_expected_result', 'word_count', 
-    'sentence_count', 'avg_word_length', 'has_altsistem', 'has_screenshots', 'url_count',
+    'sentence_count', 'avg_word_length', 'has_altsistem', 'has_screenshots', 'url_count', 'Ekran Kodu'
 ]
 
 # Eğer 'Jira' sütunu yoksa, hata almamak için sütun listesinden çıkarın

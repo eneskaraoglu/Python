@@ -1,0 +1,17 @@
+# Python'un resmi küçük boyutlu versiyonunu kullanıyoruz
+FROM python:3.10-slim
+
+# Çalışma dizinini oluştur
+WORKDIR /app
+
+# Bağımlılıkları yüklemek için gereksiz dosyaları kopyalama
+COPY requirements.txt .
+
+# Bağımlılıkları yükle
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Uygulama dosyalarını kopyala
+COPY . .
+
+# FastAPI uygulamasını başlat (host ve portu belirt)
+CMD ["uvicorn", "jira_480_backend:app", "--host", "0.0.0.0", "--port", "8000"]

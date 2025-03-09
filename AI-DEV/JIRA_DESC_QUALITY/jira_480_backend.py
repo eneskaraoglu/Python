@@ -19,7 +19,7 @@ def analyze_single(request: AnalyzeRequest):
     response = {
         "original_text": request.description,
         "cleaned_text": cleaned_text,
-        "features": features.to_dict()  # DataFrame yerine JSON formatına dönüştürüyoruz
+        "features": features # DataFrame yerine JSON formatına dönüştürüyoruz
     }
     return response
 

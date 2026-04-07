@@ -1,8 +1,8 @@
 import requests
 from datetime import datetime
 
-base_url = # Kullanıcı adı ve şifrenizi girin
-auth = # Kullanıcı adı ve şifrenizi girin
+base_url = "http://bitbucket.bilisim.com.tr/rest/api/1.0"
+auth = ("eneskaraoglu", "4321QWER")  # or use personal access token
 
 # Tüm projeleri al
 projects_response = requests.get(f"{base_url}/projects", auth=auth)
@@ -55,7 +55,10 @@ for project in projects:
             })
 
 # Depoları en son güncellenme tarihine göre sıralama
-repo_commit_data.sort(key=lambda x: x["timestamp"], reverse=True)
+repo_commit_data.sort(
+    key=lambda x: ( x.get("repo_name", ""), x.get("timestamp", 0)),
+    reverse=True
+)
 
 # Sıralanmış sonuçları yazdırma
 for data in repo_commit_data:

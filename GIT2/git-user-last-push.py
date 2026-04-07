@@ -1,8 +1,8 @@
 import requests
 from datetime import datetime
 
-base_url = # Kullanıcı adı ve şifrenizi girin
-auth =  # Kullanıcı adı ve şifrenizi girin
+base_url = "http://bitbucket.bilisim.com.tr/rest/api/1.0"
+auth = ("eneskaraoglu", "4321QWER")  # or use personal access token
 
 # Tüm projeleri al
 projects_response = requests.get(f"{base_url}/projects", auth=auth)

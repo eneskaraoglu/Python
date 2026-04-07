@@ -1,0 +1,17 @@
+ =  <@bilisim.com.tr>
+akifb = akifb <akifb@bilisim.com.tr>
+alperen = alperen <alperen@bilisim.com.tr>
+cagatay = cagatay <cagatay@bilisim.com.tr>
+cagatayozdemir = cagatayozdemir <cagatayozdemir@bilisim.com.tr>
+dilan = dilan <dilan@bilisim.com.tr>
+enes = enes <enes@bilisim.com.tr>
+hurkan = hurkan <hurkan@bilisim.com.tr>
+iatasoy = iatasoy <iatasoy@bilisim.com.tr>
+kadir = kadir <kadir@bilisim.com.tr>
+kazimbayram = kazimbayram <kazimbayram@bilisim.com.tr>
+maykurt = maykurt <maykurt@bilisim.com.tr>
+meltem = meltem <meltem@bilisim.com.tr>
+merve = merve <merve@bilisim.com.tr>
+sabitcataltas = sabitcataltas <sabitcataltas@bilisim.com.tr>
+seckin = seckin <seckin@bilisim.com.tr>
+zehragokce = zehragokce <zehragokce@bilisim.com.tr>

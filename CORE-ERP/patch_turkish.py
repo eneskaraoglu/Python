@@ -14,12 +14,10 @@ How it works:
 
 Usage:
   python patch_turkish.py <project1_dir> <project2_dir> [--dry-run]
-   & C:\Users\enes\AppData\Local\Microsoft\WindowsApps\python3.11.exe c:/WORKSPACE/PYTHON/Python/CORE-ERP/patch_turkish.py C:\JAVAKAYNAK\erp-git-utf8 C:\JAVAKAYNAK\erp-git
 
 Example:
   python patch_turkish.py C:/projects/erp_utf8 C:/projects/erp_original --dry-run
   python patch_turkish.py C:/projects/erp_utf8 C:/projects/erp_original
-   & C:\Users\enes\AppData\Local\Microsoft\WindowsApps\python3.11.exe c:/WORKSPACE/PYTHON/Python/CORE-ERP/patch_turkish.py C:\JAVAKAYNAK\erp-git-utf8 C:\JAVAKAYNAK\erp-git
 """
 
 import os
